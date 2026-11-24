@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>お便りフォーム｜シンプルにおもちゃラジオ！</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--blue:#0066CC;
+--blue-dark:#004E9E;
+--yellow:#FFB800;
+--yellow-soft:#FFF3D1;
+--bg:#F4F7FB;
+--surface:#FFFFFF;
+--surface-2:#EFF5FD;
+--ink:#1A2332;
+--ink-2:#4A5A73;
+--line:#D6E2F0;
+--input-bg:#FFFFFF;
+--danger:#C62828;
+--radius-lg:18px;
+--radius-md:12px;
+}
+@media (prefers-color-scheme: dark){
+:root{
+--bg:#0E1622;
+--surface:#182536;
+--surface-2:#1D2F47;
+--yellow-soft:#3A2E08;
+--ink:#F2F5FA;
+--ink-2:#B9C7DB;
+--line:#2E4258;
+--input-bg:#101C2D;
+}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+margin:0;
+background:var(--bg);
+color:var(--ink);
+font-family:"Noto Sans JP",system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
+line-height:1.75;
+font-size:16px;
+}
+button,input,textarea,select,summary,a{ min-height:44px; }
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 56px}
+header.hero{
+background:var(--blue);
+color:#fff;
+margin:0 -16px;
+padding:28px 20px 0;
+border-bottom:6px solid var(--yellow);
+position:relative;
+overflow:hidden;
+}
+.hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1;padding-bottom:26px}
+.shop-badge{
+display:inline-flex;align-items:center;gap:8px;
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:700;font-size:13px;
+letter-spacing:0.06em;
+background:rgba(255,255,255,0.16);
+border:1px solid rgba(255,255,255,0.35);
+padding:5px 12px;border-radius:999px;
+}
+.shop-dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);flex:none}
+.hero-title{
+font-family:"M PLUS Rounded 1c",sans-serif;
+font-weight:800;
+font-size:clamp(26px,6.2vw,40px);
+line-height:1.3;
+margin:16px 0 6px;
+letter-spacing:0.01em;
+}
+.accent-yellow{color:var(--yellow)}
+.hero-sub{
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:700;
+font-size:clamp(17px,4vw,21px);
+margin:0 0 12px;
+}
+.hero-lead{margin:0;font-size:15px;color:#EAF2FF;max-width:34em}
+.hero-waves{position:absolute;right:-30px;top:-30px;width:220px;height:220px;opacity:0.14;pointer-events:none}
+.onair{
+display:inline-flex;align-items:center;gap:7px;margin-top:16px;
+font-size:13px;font-weight:700;letter-spacing:0.08em;
+}
+.rec-dot{width:10px;height:10px;border-radius:50%;background:#FF5252;box-shadow:0 0 0 4px rgba(255,82,82,0.25)}
+.card{
+background:var(--surface);
+border:1.5px solid var(--line);
+border-radius:var(--radius-lg);
+padding:22px 20px;
+margin-top:20px;
+}
+.flush-top{margin-top:18px}
+.good-card{
+display:flex;gap:16px;align-items:flex-start;
+border-color:var(--yellow);
+}
+.good-badge{
+flex:none;width:64px;height:64px;border-radius:50%;
+background:var(--yellow);color:#3D2C00;
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+font-family:"M PLUS Rounded 1c",sans-serif;line-height:1.1;
+box-shadow:0 3px 0 #D99A00;
+transform:rotate(-6deg);
+}
+.mura-text{font-size:13px;font-weight:800;letter-spacing:0.05em}
+.good-text{font-size:17px;font-weight:800;letter-spacing:0.02em}
+.good-title{font-family:"M PLUS Rounded 1c",sans-serif;font-size:17px;font-weight:800;margin:2px 0 6px}
+.good-body{margin:0;font-size:14.5px;color:var(--ink-2)}
+.good-body strong{color:var(--ink)}
+.good-dots{display:flex;gap:6px;margin-top:12px;align-items:center}
+.good-dot{
+width:26px;height:26px;border-radius:50%;
+border:2px solid var(--yellow);background:var(--surface);
+display:flex;align-items:center;justify-content:center;
+font-size:12px;font-weight:800;color:#9A7300;font-family:"M PLUS Rounded 1c",sans-serif;
+}
+.good-dot-filled{background:var(--yellow);color:#3D2C00}
+.good-note{font-size:12.5px;color:var(--ink-2);margin-left:4px}
+@media (prefers-color-scheme: dark){
+.good-dot{color:var(--yellow)}
+.good-dot-filled{color:#3D2C00}
+}
+.field-label{
+display:block;
+font-family:"M PLUS Rounded 1c",sans-serif;
+font-weight:800;font-size:17px;margin-bottom:4px;
+}
+.field-tag{
+display:inline-block;vertical-align:2px;margin-left:8px;
+font-size:11.5px;font-weight:700;letter-spacing:0.05em;
+background:var(--blue);color:#fff;padding:2px 9px;border-radius:999px;
+}
+.help{font-size:13.5px;color:var(--ink-2);margin:0 0 12px}
+.help-ex{display:block;margin-top:2px}
+.text-input,textarea{
+width:100%;
+font:inherit;font-size:16px;color:var(--ink);
+background:var(--input-bg);
+border:1.5px solid var(--line);
+border-radius:var(--radius-md);
+padding:13px 14px;
+outline:none;
+}
+.text-input:focus,textarea:focus{
+border-color:var(--blue);
+box-shadow:0 0 0 3px rgba(0,102,204,0.18);
+}
+textarea{min-height:150px;resize:vertical;line-height:1.8}
+.textarea-short{min-height:110px}
+.count{text-align:right;font-size:12px;color:var(--ink-2);margin-top:4px}
+.sec-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+.sec-num{
+flex:none;width:46px;height:46px;border-radius:12px;
+background:var(--blue);color:#fff;
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;font-size:22px;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 3px 0 var(--blue-dark);
+}
+.sec-title{
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;
+font-size:clamp(19px,4.6vw,23px);line-height:1.4;margin:4px 0 0;
+}
+.sec-kicker{font-size:12px;font-weight:700;letter-spacing:0.1em;color:var(--blue);margin:0}
+@media (prefers-color-scheme: dark){
+.sec-kicker{color:#8FC1FF}
+}
+.theme-box{
+background:var(--yellow-soft);
+border:1.5px dashed var(--yellow);
+border-radius:var(--radius-md);
+padding:16px 16px 14px;
+margin-bottom:16px;
+}
+.theme-label{font-size:12.5px;font-weight:700;letter-spacing:0.08em;color:#8A6400;margin:0 0 4px}
+@media (prefers-color-scheme: dark){
+.theme-label{color:var(--yellow)}
+}
+.theme-title{
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;
+font-size:clamp(19px,5vw,24px);line-height:1.45;margin:0;color:var(--ink);
+}
+.desc{font-size:15px;margin:0 0 16px}
+.desc p{margin:0 0 10px}
+.desc p:last-child{margin-bottom:0}
+.desc-big{font-weight:700}
+.answer-label{
+display:flex;align-items:center;gap:8px;
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;font-size:15px;margin:0 0 8px;
+}
+.answer-label::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--yellow)}
+.upload-block{margin-top:20px;padding-top:18px;border-top:1.5px solid var(--line)}
+.upload-title{
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;font-size:16px;margin:0 0 4px;
+display:flex;align-items:center;gap:8px;
+}
+.upload-note{font-size:13.5px;color:var(--ink-2);margin:0 0 12px}
+.drop{
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+border:2px dashed var(--line);border-radius:var(--radius-md);
+background:var(--surface-2);
+padding:22px 16px;text-align:center;cursor:pointer;
+min-height:120px;
+}
+.drop:hover{border-color:var(--blue)}
+.drop-t1{font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;font-size:15px}
+.drop-t2{font-size:12.5px;color:var(--ink-2)}
+.drop-wrap{position:relative}
+.file-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.previews{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.previews figure{margin:0;width:calc(33.333% - 7px);min-width:88px}
+.previews img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;border:1.5px solid var(--line);display:block}
+.previews figcaption{font-size:11px;color:var(--ink-2);margin-top:4px;word-break:break-all;line-height:1.4}
+.file-note{font-size:12.5px;color:var(--ink-2);margin-top:10px;display:none}
+.file-note-show{display:block}
+.gojuon-visual{
+display:flex;align-items:center;gap:14px;
+background:var(--surface-2);border:1.5px solid var(--line);
+border-radius:var(--radius-md);padding:14px 16px;margin-bottom:16px;
+}
+.ha-circle{
+flex:none;width:58px;height:58px;border-radius:50%;
+background:var(--blue);color:#fff;
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;font-size:30px;
+display:flex;align-items:center;justify-content:center;
+}
+.gojuon-text{margin:0;font-size:14.5px}
+.gojuon-text strong{font-size:15.5px}
+.submit-card{text-align:center;padding:26px 20px}
+.submit-note{font-size:14px;color:var(--ink-2);margin:0 0 16px}
+.btn{
+display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;font-size:17px;
+border:none;cursor:pointer;text-decoration:none;
+border-radius:999px;padding:14px 30px;
+min-height:52px;
+}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 0 var(--blue-dark);width:100%;max-width:420px}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 2px 0 var(--blue-dark)}
+.btn-primary:disabled{opacity:0.65;cursor:wait;transform:none}
+.error{
+display:none;margin:0 auto 14px;max-width:420px;
+background:#FDECEC;color:var(--danger);border:1.5px solid #F3B8B8;
+border-radius:var(--radius-md);padding:10px 14px;font-size:14px;font-weight:700;
+}
+@media (prefers-color-scheme: dark){
+.error{background:#3A1518;border-color:#7A2E33;color:#FFB4B4}
+}
+.error-show{display:block}
+footer{margin-top:28px;text-align:center;font-size:12.5px;color:var(--ink-2)}
+.footer-shopname{font-family:"M PLUS Rounded 1c",sans-serif;font-weight:800;color:var(--ink);font-size:13.5px;margin:0 0 4px}
+.footer-line{margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+<svg class="hero-waves" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+<circle cx="100" cy="100" r="30" stroke="#fff" stroke-width="10"/>
+<circle cx="100" cy="100" r="62" stroke="#fff" stroke-width="10"/>
+<circle cx="100" cy="100" r="94" stroke="#fff" stroke-width="10"/>
+</svg>
+<div class="hero-inner">
+<span class="shop-badge"><span class="shop-dot"></span>おもちゃの村上 ─ ポッドキャスト</span>
+<h1 class="hero-title">おもちゃの村上の<br><span class="accent-yellow">シンプルにおもちゃラジオ！</span></h1>
+<p class="hero-sub">お便りフォーム</p>
+<p class="hero-lead">おもちゃの村上のポッドキャストで紹介するお便りを送るフォームです。</p>
+<span class="onair"><span class="rec-dot"></span>ON AIR ─ 毎週水曜夜 更新</span>
+</div>
+</header>
+
+<section class="card good-card flush-top" aria-label="村GOODについて">
+<div class="good-badge" aria-hidden="true">
+<span class="mura-text">村</span>
+<span class="good-text">GOOD</span>
+</div>
+<div>
+<h2 class="good-title">「村GOOD」ってなに？</h2>
+<p class="good-body">村上がグッと来た回答には<strong>「村GOOD」</strong>を差し上げています。<strong>5個集めたら良いことがあるかもしれません</strong></p>
+<div class="good-dots" aria-hidden="true">
+<span class="good-dot good-dot-filled">1</span>
+<span class="good-dot good-dot-filled">2</span>
+<span class="good-dot good-dot-filled">3</span>
+<span class="good-dot">4</span>
+<span class="good-dot">5</span>
+<span class="good-note">あと少しで…？</span>
+</div>
+</div>
+</section>
+
+<form id="otayoriForm" action="https://formsubmit.co/omochanomurakami+otayori@gmail.com" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="_subject" value="&#x3010;お便り&#x3011;シンプルにおもちゃラジオ！">
+<input type="hidden" name="_next" value="https://omochanomurakami.github.io/">
+<input type="hidden" name="_template" value="table">
+
+<section class="card">
+<label class="field-label" for="radioName">ラジオネーム<span class="field-tag">推奨</span></label>
+<p class="help">
+村GOODをとったことがある人は名前の横に回数の数字を書いてください。
+<span class="help-ex">例：江戸川コーナン3、倍AKB96(5)とか。</span>
+</p>
+<input class="text-input" type="text" id="radioName" name="ラジオネーム" placeholder="例）江戸川コーナン3" autocomplete="off">
+</section>
+
+<section class="card">
+<div class="sec-head">
+<div class="sec-num" aria-hidden="true">1</div>
+<div>
+<p class="sec-kicker">コーナー ①</p>
+<h2 class="sec-title">今週のテーマ</h2>
+</div>
+</div>
+
+<div class="theme-box">
+<p class="theme-label">今週のテーマは</p>
+<p class="theme-title">&#x3010;おもちゃの村上のあそべる大技林で遊んでみた感想！&#x3011;</p>
+</div>
+
+<div class="desc">
+<p>今回はおもちゃの村上の新しいホームページ「あそべる大技林」で遊んだみなさんへ！</p>
+<p class="desc-big">どうでした？？簡単なゲームですが楽しんでもらえましたでしょうか？質問やご意見、感想、なんでも教えてください！</p>
+<p>今週はたっぷりゲームの内容や遊び方を紹介します！！</p>
+</div>
+
+<p class="answer-label" id="themeAnswerLabel">回答</p>
+<textarea id="themeAnswer" name="今週のテーマ_回答" aria-labelledby="themeAnswerLabel" placeholder="あそべる大技林で遊んでみた感想を教えてください"></textarea>
+<div class="count"><span id="themeCount">0</span> 文字</div>
+
+<div class="upload-block">
+<h3 class="upload-title">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5a1.5 1.5 0 0 0-2 0L6 19"/></svg>
+画像添付される方
+</h3>
+<p class="upload-note">ラジオで画像を紹介する可能性があります</p>
+<div class="drop-wrap">
+<label class="drop" for="photoInput">
+<span class="drop-t1">タップして画像を選ぶ</span>
+<span class="drop-t2">ゲームのスクリーンショットなど（何枚でもOK）</span>
+</label>
+<input class="file-hidden" type="file" id="photoInput" name="添付画像" accept="image/*" multiple>
+</div>
+<div class="previews" id="previews" aria-live="polite"></div>
+<p class="file-note" id="fileNote">選んだ画像は、そのままお便りと一緒に送信されます。</p>
+</div>
+</section>
+
+<section class="card">
+<div class="sec-head">
+<div class="sec-num" aria-hidden="true">2</div>
+<div>
+<p class="sec-kicker">コーナー ②</p>
+<h2 class="sec-title">あいうえおもちゃで五十音</h2>
+</div>
+</div>
+
+<div class="gojuon-visual">
+<div class="ha-circle" aria-hidden="true">ひ</div>
+<p class="gojuon-text">頭文字<strong>「ひ」</strong>から始まるキャラクターを募集！<br><strong>1人何個でもOKです！！</strong></p>
+</div>
+
+<p class="answer-label" id="gojuonLabel">回答</p>
+<textarea class="textarea-short" id="gojuonAnswer" name="あいうえおもちゃで五十音_回答" aria-labelledby="gojuonLabel" placeholder="「ひ」から始まるキャラクターを書いてください（何個でもOK）"></textarea>
+<div class="count"><span id="gojuonCount">0</span> 文字</div>
+</section>
+
+<section class="card submit-card">
+<p class="error" id="formError" role="alert"></p>
+<p class="submit-note">①と②、どちらか一方だけの回答でも大丈夫です。<br>アカウント登録なしで、そのまま送信できます。<br>送信が終わると、ホームページに戻ります。</p>
+<button type="submit" class="btn btn-primary" id="submitBtn">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+<span id="submitLabel">お便りを送信する</span>
+</button>
+</section>
+</form>
+
+<footer>
+<p class="footer-shopname">おもちゃの村上</p>
+<p class="footer-line">シンプルにおもちゃラジオ！ ─ 毎週水曜夜、YouTubeとポッドキャストで更新中</p>
+</footer>
+</div>
+
+<script>
+(function(){
+var form=document.getElementById('otayoriForm');
+var themeAnswer=document.getElementById('themeAnswer');
+var gojuonAnswer=document.getElementById('gojuonAnswer');
+var themeCount=document.getElementById('themeCount');
+var gojuonCount=document.getElementById('gojuonCount');
+var errorBox=document.getElementById('formError');
+var submitBtn=document.getElementById('submitBtn');
+var submitLabel=document.getElementById('submitLabel');
+var photoInput=document.getElementById('photoInput');
+var previews=document.getElementById('previews');
+var fileNote=document.getElementById('fileNote');
+function bindCount(area,out){
+area.addEventListener('input',function(){out.textContent=String(area.value.length);});
+}
+bindCount(themeAnswer,themeCount);
+bindCount(gojuonAnswer,gojuonCount);
+photoInput.addEventListener('change',function(){
+var files=photoInput.files;
+previews.innerHTML='';
+if(!files){return;}
+for(var i=0;i<files.length;i++){
+(function(file){
+if(!file.type||file.type.indexOf('image/')!==0){return;}
+var fig=document.createElement('figure');
+var img=document.createElement('img');
+img.alt=file.name;
+var cap=document.createElement('figcaption');
+cap.textContent=file.name;
+var reader=new FileReader();
+reader.onload=function(e){img.src=String(e.target.result);};
+reader.readAsDataURL(file);
+fig.appendChild(img);
+fig.appendChild(cap);
+previews.appendChild(fig);
+})(files[i]);
+}
+if(files.length>0){
+fileNote.textContent='画像 '+files.length+' 枚を選択中。そのままお便りと一緒に送信されます。';
+fileNote.classList.add('file-note-show');
+}else{
+fileNote.classList.remove('file-note-show');
+}
+});
+form.addEventListener('submit',function(ev){
+var hasTheme=themeAnswer.value.trim().length>0;
+var hasGojuon=gojuonAnswer.value.trim().length>0;
+if(!hasTheme&&!hasGojuon){
+ev.preventDefault();
+errorBox.textContent='①か②、どちらかの「回答」を書いてから送信してください。';
+errorBox.classList.add('error-show');
+errorBox.scrollIntoView({behavior:'smooth',block:'center'});
+return;
+}
+errorBox.classList.remove('error-show');
+submitBtn.disabled=true;
+submitLabel.textContent='送信中…';
+});
+})();
+</script>
+</body>
+</html>
