@@ -79,6 +79,7 @@
   .btn-youtube .yt-play{display:inline-flex;align-items:center;justify-content:center;width:30px;height:21px;background:#fff;color:#FF0000;border-radius:6px;font-size:.72rem;line-height:1;flex-shrink:0;text-shadow:none;padding-left:2px}
   .nav-insta{background:linear-gradient(45deg,#4f5bd5 0%,#962fbf 28%,#d62976 55%,#fa7e1e 82%,#feda75 100%) !important;color:#fff !important;text-shadow:0 1px 2px rgba(0,0,0,.35)}
   .nav-youtube{background:#FF0000 !important;color:#fff !important;text-shadow:0 1px 2px rgba(0,0,0,.22)}
+  .nav-hub{background:var(--blue) !important;color:#fff !important;text-shadow:0 1px 2px rgba(0,0,0,.22);cursor:pointer}
   .btn-sm{padding:8px 16px;min-height:44px;font-size:.9rem;border-radius:11px}
   .btn-xl{font-size:1.15rem;padding:16px 30px;min-height:62px;border-radius:16px;width:100%}
   @media (min-width:560px){ .btn-xl{width:auto} }
@@ -109,6 +110,7 @@
   .pending-note{font-size:.82rem;color:var(--ink-soft);margin:0}
   @media (max-width:760px){ nav.main a:not(.keep){display:none} .brand .sub{display:none} }
   @media (max-width:480px){ .brand .name{display:none} .brand-logo{height:42px} }
+  @media (max-width:560px){ nav.main{gap:4px} nav.main a{padding:9px 8px;font-size:.82rem} }
 
   /* ---------- hero ---------- */
   .hero{
@@ -1759,6 +1761,7 @@
     <nav class="main" aria-label="外部リンク">
       <a class="keep nav-insta" href="https://www.instagram.com/omochanomurakami/" target="_blank" rel="noopener" style="border-radius:10px;font-weight:900">Instagram</a>
       <a class="keep nav-youtube" href="https://www.youtube.com/@omochanomurakami" target="_blank" rel="noopener" style="border-radius:10px;font-weight:900">YouTube</a>
+      <a class="keep nav-hub" href="#hubOverlay" id="navHubLink" aria-haspopup="dialog" style="border-radius:10px;font-weight:900">あそびコーナー</a>
     </nav>
   </div>
 </header>
@@ -2270,7 +2273,7 @@
           </button>
           <figcaption class="flyer-cap">表紙 ― 「おもちゃの村上のシンプルにおもちゃラジオ!!」タップ／クリックで拡大できます</figcaption>
         </figure>
-        <div style="margin-top:30px">
+        <div style="margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;align-items:center">
           <a class="btn btn-youtube" href="https://www.youtube.com/@omochanomurakami" target="_blank" rel="noopener"><span class="yt-play" aria-hidden="true">▶</span>YouTubeで聴く</a>
         </div>
       </div>
@@ -7103,6 +7106,13 @@
     window.OMU_HUB_BACK = showHub;
 
     fab.addEventListener('click', openHub);
+    var navHubLink = document.getElementById('navHubLink');
+    if (navHubLink){
+      navHubLink.addEventListener('click', function(e){
+        e.preventDefault();
+        openHub();
+      });
+    }
     document.getElementById('hubClose').addEventListener('click', closeHub);
     // Capture phase: this must run BEFORE the quiz / game Escape
     // handlers, whose close path re-opens the hub (OMU_HUB_BACK) —
